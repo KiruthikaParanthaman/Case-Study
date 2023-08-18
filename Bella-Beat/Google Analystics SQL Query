@@ -1,0 +1,42 @@
+SELECT 
+ DA.id as id,
+ DA.Activitydate as Date,
+ DA.Totalsteps as Totalsteps,
+ DA.Totaldistance as Totaldistance,
+ DA.VeryActiveDistance AS VeryActiveDistance,
+ DA.ModeratelyActiveDistance AS ModerateActiveDistance,
+ DA.LightActiveDistance AS LightActiveDistance,
+ DA.VeryActiveMinutes AS VeryActiveMinutes,
+ DA.FairlyActiveMinutes AS ModerateActiveMinutes,
+ DA.LightlyActiveMinutes AS LightActiveMinutes,
+ DA.SedentaryMinutes  AS SedantaryMinutes,
+ DC.Calories AS DailyCaloriesBurned,
+ DS.StepTotal AS Dailysteps,
+ Sl.TotalMinutesAsleep AS TotalSleep_min,
+ Sl.TotalTimeInbed AS TotalTimeInBed,
+ #HR.Value AS HeartRate ,
+ Wt.WeightKg AS Weight,
+ Wt.BMI AS BMI
+ 
+ FROM `myproject-374717.Bellabeat.dailyActivity` AS DA
+ FULL OUTER JOIN myproject-374717.Bellabeat.dailyCalories AS DC
+ ON DA.id=DC.id and DA.ActivityDate =DC.ActivityDay
+ FULL OUTER JOIN myproject-374717.Bellabeat.dailyIntensities as DI
+ ON DI.id=DC.id AND DI.ActivityDay = DC.ActivityDay
+ FULL OUTER JOIN myproject-374717.Bellabeat.dailySteps as DS
+ ON DS.id = DC.id AND DS.ActivityDay = DC.Activityday
+ FULL OUTER JOIN myproject-374717.Bellabeat.sleep as Sl
+ ON ds.ID=SL.ID AND ds.ActivityDay = CAST(FORMAT_DATE('%F',PARSE_DATETIME('%m/%d/%Y %I:%M:%S %p',sl.sleepday))AS DATE)
+ #FULL OUTER JOIN myproject-374717.Bellabeat.heartRate_seconds AS HR
+ #ON DS.ID=HR.id AND DS.Activityday = CAST(FORMAT_DATE('%F', 
+ #PARSE_DATETIME('%m/%d/%Y %I:%M:%S %p',hr.time))AS DATE)
+
+
+ FULL OUTER JOIN myproject-374717.Bellabeat.weight AS Wt
+
+ ON DS.id = Wt.id AND
+  DS.Activityday = 
+  CASE WHEN date LIKE "%-%-%" 
+   THEN CAST(PARSE_TIMESTAMP("%m-%d-%y %H:%M",Wt.Date) AS DATE)
+   ELSE CAST(PARSE_TIMESTAMP("%m/%d/%Y %I:%M:%S %p",Wt.Date) AS DATE)
+  END
