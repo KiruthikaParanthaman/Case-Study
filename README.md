@@ -9,5 +9,6 @@
 
 2. Bellabeat Case Study :
    Bellabeat  Case Study is a part of Google Analytics Certificate Course Capstone Project.It is a fitness tracker app which records users sleep,total steps,total 
-   distance walked,total calories burned etc.Data has beeen uploaded in Google Cloud **BigQuery** and data merged using **SQL**.Visualisation has been done using **Tableau** 
+   distance walked,total calories burned etc.Data has beeen uploaded in Google Cloud **BigQuery** and data merged using **SQL**.Visualisation has been done using **Tableau** which can be
+   accessed from <https://public.tableau.com/app/profile/kiruthika.p6085/viz/BellabeatTableauDashboard/Dashboard1>
        
